@@ -6,7 +6,7 @@
   "scripts": {
     "api-service": "nodemon index.js"
   },
-  "author": "aldiprasetya",
+  "author": "verlando",
   "license": "ISC",
   "dependencies": {
     "body-parse": "^0.1.0",
