@@ -6,6 +6,6 @@ const db = mysql.createConnection({
     database: "sql6702751",
     password: "ulTfR6Lyi9",
 });
-//
+
 
 module.exports = db;
