@@ -10,12 +10,12 @@ const response = require('./response.js');
 app.use(bodyParser.json());
 
 // Handle root route
-app.get("/mahasiswa", (req, res) => {
+app.get("/", (req, res) => {
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
 // Handle /mahasiswa route to handle all CRUD operations
-app.all("/", (req, res) => {
+app.all("/mahasiswa", (req, res) => {
   if (req.method === "GET") {
     const sql = "SELECT * FROM tb_mahasiswa";
     db.query(sql, (err, result) => {
