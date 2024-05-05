@@ -16,29 +16,11 @@ app.get("/", (req, res) => {
 
 // Handle /mahasiswa route to handle all CRUD operations
 app.get("/mahasiswa", (req, res) => {
-  if (req.method === "GET") {
-    const sql = "SELECT * FROM tb_mahasiswa";
-    db.query(sql, (err, result) => {
-      if (err) response(500, "error", err, res);
-      response(200, result, "get all data mahasiswa", res);
-    });
-  } else if (req.method === "POST") {
-    const { nama, npm, alamat } = req.body;
-    const sql = `INSERT INTO tb_mahasiswa (nama_mhs, npm_mhs, alamat_mhs) VALUES ('${nama}', '${npm}', '${alamat}')`;
-
-    db.query(sql, (err, fields) => {
-      if (err) response(500, "error", err, res);
-      if (fields?.affectedRows) {
-        const data = {
-          isSuccess: fields.affectedRows,
-          id: fields.insertId,
-        };
-        response(200, data, "Data Berhasil Ditambahkan", res);
-      }
-    });
-  } else {
-    response(405, "method not allowed", "Method not allowed", res);
-  }
+  const sql = "SELECT * FROM tb_mahasiswa";
+  db.query(sql, (err, result) => {
+    if (err) response(500, "error", err, res);
+    response(200, result, "get all data mahasiswa", res);
+  });
 });
 
 // Other routes for specific mahasiswa by npm
@@ -85,6 +67,11 @@ app.delete("/mahasiswa/:npm", (req, res) => {
       response(404, "not found", "Data tidak ditemukan", res);
     }
   });
+});
+
+// Redirect all other routes to /
+app.get("*", (req, res) => {
+  res.redirect("/");
 });
 
 app.listen(port, () => {
