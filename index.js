@@ -13,22 +13,23 @@ app.get("/", (req, res) => {
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
-app.get("/mahasiswa", (req, res) => {
-  const sql = "SELECT * FROM tb_mahasiswa";
-  db.query(sql, (err, result) => {
-    if (err) response(500, "error", err, res);
-    response(200, result, "get all data mahasiswa", res);
-  });
-});
 
-app.get("/mahasiswa/:npm", (req, res) => {
-  const url_data = req.params.npm;
-  const sql = `SELECT * FROM tb_mahasiswa WHERE npm_mhs='${url_data}'`;
-  db.query(sql, (err, result) => {
-    if (err) response(500, "error", err, res);
-    response(200, result, "get data mahasiswa by npm", res);
-  });
-});
+app.get('/mahasiswa', (req,res)=>{
+    const sql ='SELECT * FROM tb_mahasiswa'
+    db.query(sql,(error, result)=>{
+        response(200,result,'data mahasiswa', res)
+    })
+})
+
+app.get('/mahasiswa/:npm', (req, res)=>{
+  const npm = req.params.npm
+  const sql = `SELECT * FROM tb_mahasiswa where npm='${npm}'`
+  db.query(sql, (err, result)=>{
+    if(err) throw err
+    response(200,result,"get detail mahasiswa",res)
+  })
+})
+
 
 app.post("/mahasiswa", (req, res) => {
   const { nama, npm, alamat } = req.body;
