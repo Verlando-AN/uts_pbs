@@ -70,7 +70,7 @@ app.delete("/mahasiswa/:npm", (req, res) => {
 });
 
 // Redirect all other routes to /
-app.get("*", (req, res) => {
+app.get("*/mahasiswa", (req, res) => {
   res.redirect("/");
 });
 
