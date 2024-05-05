@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 // Handle /mahasiswa route to handle all CRUD operations
-app.all("/mahasiswa", (req, res) => {
+app.get("/mahasiswa", (req, res) => {
   if (req.method === "GET") {
     const sql = "SELECT * FROM tb_mahasiswa";
     db.query(sql, (err, result) => {
