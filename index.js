@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 const bodyParser = require('body-parser');
-const db = require('./config.js')
-const response = require('./response.js')
+const db = require('./config.js');
+const response = require('./response.js');
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
@@ -13,24 +13,26 @@ app.get("/", (req, res) => {
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
+// GET all mahasiswa
+app.get("/mahasiswa", (req, res) => {
+  const sql = "SELECT * FROM tb_mahasiswa";
+  db.query(sql, (err, result) => {
+    if (err) response(500, "error", err, res);
+    response(200, result, "get all data mahasiswa", res);
+  });
+});
 
-app.get('/mahasiswa', (req,res)=>{
-    const sql ='SELECT * FROM tb_mahasiswa'
-    db.query(sql,(error, result)=>{
-        response(200,result,'data mahasiswa', res)
-    })
-})
+// GET mahasiswa by npm
+app.get("/mahasiswa/:npm", (req, res) => {
+  const npm = req.params.npm;
+  const sql = `SELECT * FROM tb_mahasiswa WHERE npm_mhs='${npm}'`;
+  db.query(sql, (err, result) => {
+    if (err) response(500, "error", err, res);
+    response(200, result, "get data mahasiswa by npm", res);
+  });
+});
 
-app.get('/mahasiswa/:npm', (req, res)=>{
-  const npm = req.params.npm
-  const sql = `SELECT * FROM tb_mahasiswa where npm='${npm}'`
-  db.query(sql, (err, result)=>{
-    if(err) throw err
-    response(200,result,"get detail mahasiswa",res)
-  })
-})
-
-
+// POST new mahasiswa
 app.post("/mahasiswa", (req, res) => {
   const { nama, npm, alamat } = req.body;
   const sql = `INSERT INTO tb_mahasiswa (nama_mhs, npm_mhs, alamat_mhs) VALUES ('${nama}', '${npm}', '${alamat}')`;
@@ -47,6 +49,7 @@ app.post("/mahasiswa", (req, res) => {
   });
 });
 
+// PUT update mahasiswa by npm
 app.put("/mahasiswa/:npm", (req, res) => {
   const { nama, alamat } = req.body;
   const npm = req.params.npm;
@@ -66,6 +69,7 @@ app.put("/mahasiswa/:npm", (req, res) => {
   });
 });
 
+// DELETE mahasiswa by npm
 app.delete("/mahasiswa/:npm", (req, res) => {
   const npm = req.params.npm;
   const sql = `DELETE FROM tb_mahasiswa WHERE npm_mhs ='${npm}'`;
