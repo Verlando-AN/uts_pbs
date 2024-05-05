@@ -10,8 +10,6 @@ const response = require('./response.js')
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-   const sql ='SELECT * FROM tb_mahasiswa'
-    db.query(sql,(error, result)=>{
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
