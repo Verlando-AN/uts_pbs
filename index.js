@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3002;
 
 const bodyParser = require('body-parser');
-const db = require('./config.js');
+const db = require('./connection.js');
 const response = require('./response.js');
 
 // Middleware for parsing JSON bodies
