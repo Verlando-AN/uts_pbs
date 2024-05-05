@@ -12,7 +12,7 @@
       "dest": "/mahasiswa"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*/mahasiswa)",
       "dest": "/"
     }
   ]
