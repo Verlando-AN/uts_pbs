@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/mahasiswa",
-      "dest": "/mahasiswa"
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
