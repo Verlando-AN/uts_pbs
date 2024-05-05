@@ -3,9 +3,9 @@ const mysql = require('mysql');
 
 // Variabel koneksi database
 const db = mysql.createConnection({
-  host: 'localhost', // Host database
-  user: 'root', // Pengguna database
-  password: '', // Kata sandi database
+  host: 'sql6.freesqldatabase.com', // Host database
+  user: 'sql6702751', // Pengguna database
+  password: 'ulTfR6Lyi9', // Kata sandi database
   database: 'sql6702751' // Mengasumsikan 'mahasiswa' adalah nama database Anda
 });
 
