@@ -9,11 +9,11 @@ const response = require('./response.js');
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/mahasiswa", (req, res) => {
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
-app.get("/mahasiswa", (req, res) => {
+app.get("/", (req, res) => {
   const sql = "Select * from tb_mahasiswa";
   db.query(sql, (err, result) => {
     if (err) throw err;
