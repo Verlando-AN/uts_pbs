@@ -3,19 +3,19 @@ const app = express();
 const port = process.env.PORT || 3002;
 
 const bodyParser = require('body-parser');
-const db = require('./config.js');
+const db = require('./connection.js');
 const response = require('./response.js');
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
 
 // Handle root route
-app.get("/", (req, res) => {
+app.get("/mahasiswa", (req, res) => {
   response(200, "welcome to api", "Selamat datang di api service", res);
 });
 
 // Handle /mahasiswa route to handle all CRUD operations
-app.all("/mahasiswa", (req, res) => {
+app.all("/", (req, res) => {
   if (req.method === "GET") {
     const sql = "SELECT * FROM tb_mahasiswa";
     db.query(sql, (err, result) => {
